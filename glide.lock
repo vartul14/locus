@@ -1,0 +1,18 @@
+hash: 0aeff7cffd671d4693b84a928356668f9bcac2319f503caf33d26c368baabaf1
+updated: 2021-02-07T22:23:59.062408+05:30
+imports:
+- name: github.com/go-resty/resty
+  version: e3917a51a33f092fd98ecb503a4e8da7e3b01470
+  subpackages:
+  - v2
+- name: github.com/golang/gddo
+  version: 20d68f94ee1f7547de2b1c68627253df20c8d45e
+  subpackages:
+  - httputil/header
+- name: github.com/gorilla/mux
+  version: 98cb6bf42e086f6af920b965c38cacc07402d51b
+- name: golang.org/x/net
+  version: 5f4716e94777e714bc2fb3e3a44599cb40817aac
+  subpackages:
+  - publicsuffix
+testImports: []

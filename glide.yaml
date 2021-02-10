@@ -1,0 +1,9 @@
+package: vartul14/locus
+import:
+- package: github.com/go-resty/resty
+  version: v2.4.0
+  subpackages:
+  - v2
+- package: github.com/golang/gddo
+  subpackages:
+  - httputil/header
