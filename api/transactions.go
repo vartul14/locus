@@ -7,8 +7,8 @@ import (
 	"vartul14/locus/logic"
 )
 
-func GetDirections(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("In GetDirections API")
+func GetTransactions(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("In Get Transactions API")
 
 	var request dto.GetDirectionsRequest
 	err := decodeJSONBody(w, r, &request)
