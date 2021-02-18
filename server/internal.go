@@ -24,6 +24,15 @@ func startExternalHTTPServer() {
 }
 
 func addTransactionsAPIs(r *mux.Router) {
-	r.HandleFunc("/directions", api.GetTransactions).
+	r.HandleFunc("/transactionservice/transaction/", api.UpdateTransactions).
+		Methods("PUT")
+
+	r.HandleFunc("/transactionservice/transaction/", api.GetTransactions).
+		Methods("GET")
+	
+	r.HandleFunc("/transactionservice/types/", api.GetTransactionsFromTypes).
+		Methods("GET")
+	
+	r.HandleFunc("/transactionservice/sum/", api.GetTransactionsSum).
 		Methods("GET")
 }

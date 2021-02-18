@@ -6,11 +6,16 @@ import (
 	"fmt"
 
 	"net/http"
+	"strconv"
 
 
 
 	"github.com/golang/gddo/httputil/header"
 )
+
+type Error struct {
+	ErrorMessage string
+}
 
 func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) error {
 	if r.Header.Get("Content-Type") != "" {
@@ -23,13 +28,20 @@ func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) err
 
 	pathParams := make(map[string]interface{})
 	pathParams["request-id"] = r.URL.Query().Get("request-id")
-	pathParams["start-lat"] = r.URL.Query().Get("start-lat")
-	pathParams["start-lon"] = r.URL.Query().Get("start-lon")
-	pathParams["end-lat"] = r.URL.Query().Get("end-lat")
-	pathParams["end-lon"] = r.URL.Query().Get("end-lon")
+	pathParams["transaction-id"], _ = strconv.Atoi(r.URL.Query().Get("transaction-id"))
+	pathParams["transaction-type"] = r.URL.Query().Get("transaction-type")
 
 	data, _ := json.Marshal(pathParams)
-	fmt.Printf(string(data))
+	//fmt.Println(string(data))
 	_ = json.Unmarshal(data, dst)
 	return nil
+}
+
+func sendErrorResponse(w http.ResponseWriter, logicErr error) {
+	err := Error{
+		ErrorMessage: logicErr.Error(),
+	}
+
+	jsonRes, _ := json.Marshal(err)
+	fmt.Fprintf(w, string(jsonRes))
 }
