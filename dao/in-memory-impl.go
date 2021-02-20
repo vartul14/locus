@@ -37,9 +37,11 @@ func (impl *InMemoryImpl) UpdateTransaction(transactionID int, transactionData T
 	li = append(li, transactionID)
 	dbByType[transactionData.TransactionType] = li
 
-	list := dbByUltimateParent[transactionData.UltimateParentID]
+	parentData := db[transactionData.ParentID]
+	ultiParent := parentData.UltimateParentID
+	list := dbByUltimateParent[ultiParent]
 	list = append(list, transactionID)
-	dbByUltimateParent[transactionData.UltimateParentID] = list
+	dbByUltimateParent[ultiParent] = list
 }
 
 func (impl *InMemoryImpl) GetTransaction (transactionID int) TransactionData {

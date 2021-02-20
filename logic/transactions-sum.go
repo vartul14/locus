@@ -11,7 +11,7 @@ func GetTransactionsSum (request dto.GetTransactionsSumRequest) (*dto.GetTransac
 	transactionData := dao.InMemoryDB.GetTransaction(request.TransactionID)
 	listTransactionID := dao.InMemoryDB.GetTransactionsByUltimateParentID(transactionData.UltimateParentID)
 	
-	sum := 0.0
+	var sum float64
 	for _, val := range listTransactionID {
 		transaction := dao.InMemoryDB.GetTransaction(val)
 		sum = sum + transaction.Amount
